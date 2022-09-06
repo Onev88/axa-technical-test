@@ -1,0 +1,4 @@
+Bundle-Name: Customers
+Bundle-SymbolicName: co.axacolpatria.technicaltest.customers
+Bundle-Version: 1.0.0
+Export-Package: co.axacolpatria.technicaltest.customers.constants
