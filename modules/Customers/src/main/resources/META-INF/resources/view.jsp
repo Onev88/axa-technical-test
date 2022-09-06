@@ -2,7 +2,7 @@
 
 <div class="container px-3 py-3">
 	<h2 id="greetings" class="resaltado-naranja">
-		<liferay-ui:message key="co.axacolpatria.technicaltest.customers.greetings" />
+		<liferay-ui:message key="co.axacolpatria.technicaltest.customers.greetings" /> ${screenName}
 	</h2>
 	<div id="customersTable">
 		<table>
