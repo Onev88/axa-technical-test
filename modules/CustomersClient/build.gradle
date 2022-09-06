@@ -1,0 +1,16 @@
+apply plugin: "maven"
+group = "co.axacolpatria.technicaltest.customers"
+
+dependencies {
+	compileOnly group: "org.osgi", name: "org.osgi.core"
+	compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations"
+	
+	//OkHttp3	
+	compileInclude group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.4.0'
+	
+	compileOnly 'com.liferay.portal:com.liferay.portal.kernel:4.4.0'
+}
+
+repositories {
+    mavenLocal()
+}

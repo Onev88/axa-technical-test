@@ -1,0 +1,7 @@
+Bundle-Name: CustomersClient
+Bundle-SymbolicName: co.axacolpatria.technicaltest.customersClient
+Bundle-Version: 1.0.0
+Export-Package: \
+	co.axacolpatria.technicaltest.customers.api,\
+	co.axacolpatria.technicaltest.customers.model
+Import-Package: *;resolution:="optional"
