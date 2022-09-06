@@ -10,47 +10,33 @@ const listCustomers = function(){
 	ajaxExecute(listCustomersURL, data, function(response){
 		
 		response = JSON.parse(response);
-		let receiptsArray = response.receipts;
+		let customersArray = response.customers;
 		
 		let tbody = document.querySelector("#customersTable tbody");
 		tbody.innerHTML = "";
 		
-		document.getElementById("totalAmountTD").innerHTML="0";
-		
-		receiptsArray.forEach(receipt => {
+		customersArray.forEach(customer => {
 			let row = document.createElement("tr");
 			
 			
-			let checkCol = document.createElement("td");
-			let policyCol = document.createElement("td");
-			let invoiceCol = document.createElement("td");
-			let amountCol = document.createElement("td");
+			let nameTD = document.createElement("td");
+			let ageTD = document.createElement("td");
+			let phoneNumberTD = document.createElement("td");
+			let addressTD = document.createElement("td");
 			
-			invoiceCol.colSpan = 4;
+			nameTD.innerHTML=customer.name;
+			ageTD.innerHTML=customer.age;
+			phoneNumberTD.innerHTML=customer.phoneNumber;
+			addressTD.innerHTML=customer.address;
 			
-			checkCol.append(createCheckbox(receipt));
-			policyCol.innerHTML=receipt.policy;
-			invoiceCol.innerHTML=receipt.invoice;
-			amountCol.innerHTML=receipt.amount;
-			
-			row.append(checkCol);
-			row.append(policyCol);
-			row.append(invoiceCol);
-			row.append(amountCol);
+			row.append(nameTD);
+			row.append(ageTD);
+			row.append(phoneNumberTD);
+			row.append(addressTD);
 			
 			tbody.appendChild(row);
 			
 		});
-		
-		if(receiptsArray.lenght==0){
-			let row = document.createElement("tr");
-			let col = document.createElement("td");
-			col.colSpan=7;
-			col.className="text-center";
-			row.append(col);
-			tbody.appendChild(row);
-		}
-		
 	});
 }
 
@@ -64,6 +50,7 @@ const ajaxExecute = function(url, data, callback){
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.onreadystatechange = function (){
 		if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+			console.log(xhr.responseText)
 			callback(xhr.responseText);
 	    }
 	}
