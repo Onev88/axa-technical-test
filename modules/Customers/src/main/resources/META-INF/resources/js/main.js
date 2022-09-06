@@ -1,20 +1,38 @@
+var listCustomersArray;
+
 document.addEventListener("DOMContentLoaded", function() {
-	console.log("listCustomersURL: "+listCustomersURL);
 	listCustomers();
+	document.getElementById(pns+"search").addEventListener('click', function handleClick(event) {
+		search();
+	});
 });
 
 
 const listCustomers = function(){
-	
-	var data="";
-	ajaxExecute(listCustomersURL, data, function(response){
-		
+	ajaxExecute(listCustomersURL, "", function(response){
 		response = JSON.parse(response);
 		let customersArray = response.customers;
-		
-		let tbody = document.querySelector("#customersTable tbody");
-		tbody.innerHTML = "";
-		
+		listCustomersArray = response.customers;
+		populateTable(customersArray);
+	});
+}
+
+const search = function(){
+	var filterValue=document.getElementById(pns+"filter").value;
+	let customersArray = filterValue!=""?listCustomersArray.filter(customer => JSON.stringify(customer).includes(filterValue)):listCustomersArray;
+	populateTable(customersArray);
+}
+
+const orderCustomer = function(){
+	let customersArray = listCustomersArray;
+	populateTable(customersArray);
+}
+
+
+const populateTable = function(customersArray){
+	let tbody = document.querySelector("#customersTable tbody");
+	tbody.innerHTML = "";
+	if(customersArray.length>0){
 		customersArray.forEach(customer => {
 			let row = document.createElement("tr");
 			
@@ -37,11 +55,16 @@ const listCustomers = function(){
 			tbody.appendChild(row);
 			
 		});
-	});
+	}else{
+		let row = document.createElement("tr");
+		let emptyTD = document.createElement("td");
+		emptyTD.setAttribute("colspan","4");
+		emptyTD.classList.add("text-center");
+		emptyTD.innerHTML = "No se encontraron registros";
+		row.append(emptyTD);
+		tbody.appendChild(row);
+	}
 }
-
-
-
 
 const ajaxExecute = function(url, data, callback){
 	
@@ -50,7 +73,7 @@ const ajaxExecute = function(url, data, callback){
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.onreadystatechange = function (){
 		if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-			console.log(xhr.responseText)
+			console.log(xhr.responseText);
 			callback(xhr.responseText);
 	    }
 	}
