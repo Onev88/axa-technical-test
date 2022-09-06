@@ -8,7 +8,11 @@ dependencies {
 	//OkHttp3	
 	compileInclude group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.4.0'
 	
+	//Liferay's Kernel
 	compileOnly 'com.liferay.portal:com.liferay.portal.kernel:4.4.0'
+	
+	//Petra
+	compileOnly group: "com.liferay", name: "com.liferay.petra.string"
 }
 
 repositories {
