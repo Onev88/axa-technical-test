@@ -1,6 +1,5 @@
 package co.axacolpatria.technicaltest.customers.portlet.resources;
 
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
@@ -34,12 +33,7 @@ public class getCustomersListMVCResourceCommand implements MVCResourceCommand{
 		
 		try {
 			PrintWriter writer = response.getWriter();
-			
-			JSONObject resultJSONObject = customerClientUtil.getCustomers();
-			
-			LOG.info("resultJSONObject: "+resultJSONObject);
-			
-			writer.print(resultJSONObject);
+			writer.print(customerClientUtil.getCustomers());
 			writer.flush();
 			writer.close();
 			return false;
