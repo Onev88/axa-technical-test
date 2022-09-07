@@ -16,7 +16,6 @@ import org.osgi.service.component.annotations.Component;
 import co.axacolpatria.technicaltest.customers.api.CustomersClient;
 import co.axacolpatria.technicaltest.customers.model.Customers;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -64,8 +63,6 @@ public class CustumersClientImpl implements CustomersClient {
 	@Override
 	public JSONObject saveCustomer(Customers customer) {
 		
-		LOG.info("saveCustomer...");
-		
 		JSONObject resultJSONObject = JSONFactoryUtil.createJSONObject();
 				
 		try {
@@ -81,8 +78,6 @@ public class CustumersClientImpl implements CustomersClient {
 			customerJSONObject.put("address", customer.getAddress());
 			
 			
-			LOG.info("customerJSONObject..."+customerJSONObject);
-			
 			RequestBody body = RequestBody.create(customerJSONObject.toString(),jsonMediaType); 
 					
 			Request request = new Request.Builder()
@@ -90,8 +85,6 @@ public class CustumersClientImpl implements CustomersClient {
 			Response response = ohc.newCall(request).execute();
 				
 			resultJSONObject = JSONFactoryUtil.createJSONObject(response.body().string());
-			
-			LOG.info("resultJSONObject..."+resultJSONObject);
 				
 			} catch (IOException e) {
 				LOG.error(e);

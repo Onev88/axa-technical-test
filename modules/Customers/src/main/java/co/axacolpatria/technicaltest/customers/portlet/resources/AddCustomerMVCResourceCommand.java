@@ -30,8 +30,6 @@ public class AddCustomerMVCResourceCommand implements MVCResourceCommand{
 	public boolean serveResource(ResourceRequest request, ResourceResponse response)
 			throws PortletException {
 		// TODO Auto-generated method stub
-		LOG.info("addCustomer....");
-		
 		
 		Customers customer = new Customers();
 		
