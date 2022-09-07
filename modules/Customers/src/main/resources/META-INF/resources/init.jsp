@@ -13,10 +13,10 @@
 <portlet:defineObjects />
 
 <liferay-portlet:resourceURL var="listCustomersURL" id="<%=CustomersPortletKeys.RESOURCE_GET_CUSTOMERS_LIST%>"/>
-
 <liferay-portlet:resourceURL var="addCustomerURL" id="<%=CustomersPortletKeys.RESOURCE_ADD_CUSTOMER %>" />
 
 <script>
 	const pns = "<portlet:namespace/>";
 	const listCustomersURL = "${listCustomersURL}";
+	const addCustomerURL = "${addCustomerURL}";
 </script>

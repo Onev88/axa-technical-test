@@ -53,8 +53,6 @@
 		</div>
 		<button id="<portlet:namespace/>save" type="button" class="btn btn-primary">Guardar</button>
 		<button id="<portlet:namespace/>return" type="button" class="btn btn-secundary">Regresar</button>
-		
-		addCustomerURL: <a href="${addCustomerURL}">add customer</a>
 	</form>
 </div>
 

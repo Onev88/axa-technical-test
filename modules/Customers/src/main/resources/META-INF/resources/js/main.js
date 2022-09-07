@@ -14,15 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		document.getElementById("addCustomer").classList.toggle("d-none");
 	});
 	document.getElementById(pns+"save").addEventListener('click', function handleClick(event) {
-		var obj = {};
-		let form = document.forms.customerForm;
-		var formData = new FormData(form);
-		for (var key of formData.keys()) {
-			obj[key] = formData.get(key);
-		}
-		
-		console.log(obj);
-		console.log(JSON.stringify(obj));
+		saveCustomer();
 	});
 });
 
@@ -47,6 +39,19 @@ const orderCustomer = function(){
 	populateTable(customersArray);
 }
 
+
+const saveCustomer = function(){
+	
+	var name=document.getElementById(pns+"name").value;
+	var age=document.getElementById(pns+"age").value;
+	var phoneNumber=document.getElementById(pns+"phoneNumber").value;
+	var address=document.getElementById(pns+"address").value;
+	
+	var data=pns+"name="+name+"&"+pns+"age="+age+"&"+pns+"phoneNumber="+phoneNumber+"&"+pns+"address="+address;
+	ajaxExecute(addCustomerURL, data, function(response){
+		
+	});
+}
 
 const populateTable = function(customersArray){
 	let tbody = document.querySelector("#customersTable tbody");
