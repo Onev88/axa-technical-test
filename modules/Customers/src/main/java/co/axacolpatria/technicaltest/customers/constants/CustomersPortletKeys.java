@@ -19,6 +19,7 @@ public class CustomersPortletKeys {
 
 	// RESOURCE METHODS
 	public static final String RESOURCE_GET_CUSTOMERS_LIST = "getCustomersList";
+	public static final String RESOURCE_ADD_CUSTOMER = "addCustomers";
 	
 	// OTHERS PATHS AND URLS
 	public static final String INITIAL_JSP_PATH = "/view.jsp";

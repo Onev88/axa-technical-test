@@ -15,8 +15,11 @@ import org.osgi.service.component.annotations.Component;
 
 import co.axacolpatria.technicaltest.customers.api.CustomersClient;
 import co.axacolpatria.technicaltest.customers.model.Customers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 @Component
@@ -37,7 +40,7 @@ public class CustumersClientImpl implements CustomersClient {
 		try {
 			OkHttpClient ohc = new OkHttpClient().newBuilder().build();
 			
-			Request request = new Request.Builder().url(CUSTOMERS_URL + "/customers").build();
+			Request request = new Request.Builder().url(CUSTOMERS_URL).build();
 			
 			Response response = ohc.newCall(request).execute();
 
@@ -60,8 +63,43 @@ public class CustumersClientImpl implements CustomersClient {
 
 	@Override
 	public JSONObject saveCustomer(Customers customer) {
-
-		return null;
+		
+		LOG.info("saveCustomer...");
+		
+		JSONObject resultJSONObject = JSONFactoryUtil.createJSONObject();
+				
+		try {
+			OkHttpClient ohc = new OkHttpClient().newBuilder().build();
+			
+			MediaType jsonMediaType = MediaType.parse("application/json; charset=utf-8");
+			
+			JSONObject customerJSONObject = JSONFactoryUtil.createJSONObject();
+			
+			customerJSONObject.put("name", customer.getName());
+			customerJSONObject.put("age", customer.getAge());
+			customerJSONObject.put("phoneNumber", customer.getPhoneNumber());
+			customerJSONObject.put("address", customer.getAddress());
+			
+			
+			LOG.info("customerJSONObject..."+customerJSONObject);
+			
+			RequestBody body = RequestBody.create(customerJSONObject.toString(),jsonMediaType); 
+					
+			Request request = new Request.Builder()
+					.url(CUSTOMERS_URL).method("POST", body).build();
+			Response response = ohc.newCall(request).execute();
+				
+			resultJSONObject = JSONFactoryUtil.createJSONObject(response.body().string());
+			
+			LOG.info("resultJSONObject..."+resultJSONObject);
+				
+			} catch (IOException e) {
+				LOG.error(e);
+			} catch (JSONException e) {
+				LOG.error(e);
+			}
+				
+		return resultJSONObject;
 	}
 
 }

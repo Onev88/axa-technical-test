@@ -5,6 +5,25 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById(pns+"search").addEventListener('click', function handleClick(event) {
 		search();
 	});
+	document.getElementById(pns+"add").addEventListener('click', function handleClick(event) {
+		document.getElementById("customersList").classList.toggle("d-none");
+		document.getElementById("addCustomer").classList.toggle("d-none");
+	});
+	document.getElementById(pns+"return").addEventListener('click', function handleClick(event) {
+		document.getElementById("customersList").classList.toggle("d-none");
+		document.getElementById("addCustomer").classList.toggle("d-none");
+	});
+	document.getElementById(pns+"save").addEventListener('click', function handleClick(event) {
+		var obj = {};
+		let form = document.forms.customerForm;
+		var formData = new FormData(form);
+		for (var key of formData.keys()) {
+			obj[key] = formData.get(key);
+		}
+		
+		console.log(obj);
+		console.log(JSON.stringify(obj));
+	});
 });
 
 
