@@ -23,5 +23,11 @@ public class CustomersPortletKeys {
 	
 	// OTHERS PATHS AND URLS
 	public static final String INITIAL_JSP_PATH = "/view.jsp";
+	
+	//Status
+	public static final int STATUS_ERROR = -1;
+	public static final int STATUS_WAITING = 0;
+	public static final int STATUS_SUCCESS = 1;
+	
 
 }

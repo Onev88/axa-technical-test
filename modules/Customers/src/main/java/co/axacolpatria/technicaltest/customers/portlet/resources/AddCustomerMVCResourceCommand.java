@@ -1,5 +1,7 @@
 package co.axacolpatria.technicaltest.customers.portlet.resources;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
@@ -33,13 +35,35 @@ public class AddCustomerMVCResourceCommand implements MVCResourceCommand{
 		
 		Customers customer = new Customers();
 		
-		customer.setName(ParamUtil.getString(request, "name", ""));
+		customer.setName(ParamUtil.getString(request, "name"));
 		customer.setAge(ParamUtil.getInteger(request, "age"));
 		customer.setPhoneNumber(ParamUtil.getString(request, "phoneNumber",""));
 		customer.setAddress(ParamUtil.getString(request, "address",""));
 		customerClientUtil.saveCustomer(customer);
 		
 		return false;
+	}
+	
+	private JSONObject validacionDatos(Customers customer) {
+		
+		JSONObject statusJSONObject = JSONFactoryUtil.createJSONObject();
+		String message = "";
+		int statusCode = CustomersPortletKeys.STATUS_SUCCESS;
+		
+		if(customer.getName().isEmpty()||customer.getAge()==0||customer.getPhoneNumber().isEmpty()||customer.getAddress().isEmpty()) {
+			message = "Por favor, diligencie todos los campos";
+			statusCode = CustomersPortletKeys.STATUS_ERROR;
+		}
+		
+		if(customer.getName().isEmpty()||customer.getPhoneNumber().isEmpty()||customer.getAddress().isEmpty()) {
+			message = "Por favor, diligencie todos los campos";
+			statusCode = CustomersPortletKeys.STATUS_ERROR;
+		}
+		
+		statusJSONObject.put("statusCode", statusCode);
+		statusJSONObject.put("message", message);
+		
+		return statusJSONObject;
 	}
 
 }
